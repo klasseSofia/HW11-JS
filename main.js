@@ -4,24 +4,26 @@ function Clock(tZone, elemId) {
 };
 
 Clock.prototype.showClock = function(){
-    this.time = new Date();
-    this.hours = time.getHours();
-    this.min = time.getMinutes();
-    this.sec = time.getSeconds();
+    var tzoneDateString = new Date().toLocaleString("en-US", {tZone: this.tzone});
+    var tzoneDate = new Date(tzoneDateString);
+    this.hours = tzoneDate.getHours();
+    this.min = tzoneDate.getMinutes();
+    this.sec = tzoneDate.getSeconds();
 
-    if(hours<=9) {
-        hours = '0' + hours;
+    if(this.hours<=9) {
+        this.hours = '0' + this.hours;
     }
-    if(min<=9) {
-        min = '0' + min;
+    if(this.min<=9) {
+        this.min = '0' + this.min;
     }
-    if(sec<=9) {
-        sec = '0' + sec;
+    if(this.sec<=9) {
+        this.sec = '0' + this.sec;
     }
+    var time;
 
-    time = hours + ':' + min + ':' + sec;
-    document.getElementById(elemId).innerHTML=time;
-    setInterval('cTime()', 1000);
+    time = this.hours + ':' + this.min + ':' + this.sec;
+    document.getElementById(this.elemId).innerHTML = time;
+    setInterval('cTime()', 100);
 }
 
 function ClockWithMilliseconds(tZone, elemId) {
@@ -32,15 +34,29 @@ ClockWithMilliseconds.prototype = Object.create(Clock.prototype);
 ClockWithMilliseconds.prototype.constructor = ClockWithMilliseconds;
 
 ClockWithMilliseconds.prototype.showClock = function () {
-    this.msec = time.getSeconds();
+    var tzoneDateString = new Date().toLocaleString("en-US", {tZone: this.tzone});
+    var tzoneDate = new Date(tzoneDateString);
+    this.hours = tzoneDate.getHours();
+    this.min = tzoneDate.getMinutes();
+    this.sec = tzoneDate.getSeconds();
+    this.msec = tzoneDate.getMilliseconds();
 
-    if(msec<=9)  {
-        sec = '0' + sec;
+    if(this.hours<=9) {
+        this.hours = '0' + this.hours;
     }
-
-    time = hours + ':' + min + ':' + sec + ':' + msec;
-    document.getElementById(elemId).innerHTML=time;
-    setInterval('cTime()', 1000);
+    if(this.min<=9) {
+        this.min = '0' + this.min;
+    }
+    if(this.sec<=9) {
+        this.sec = '0' + this.sec;
+    }
+    if(this.msec<=9)  {
+        this.msec = '0' + this.msec;
+    }
+    var time;
+    time = this.hours + ':' + this.min + ':' + this.sec + ':' + this.msec;
+    document.getElementById(this.elemId).innerHTML=time;
+    setInterval('cTime()', 100);
 };
 
 function cTime() {
